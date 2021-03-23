@@ -1,0 +1,145 @@
+TODO:
+
+[$] Multitouch Componenten switch z-index bei touchdown, nicht erst bei drag, tab geht nicht
+[x] stammbaum dummy
+
+[ ] wie entstehen fossilien dummy
+    Animationssequenz ca 5-7 Einzelbilder und kurze Texte, parallel Illu bl    INCLUSIVE!
+    start/pause, rechts links option
+
+[x] Alter der Funde dummy
+    Einleitungstext
+    4 Karten mit den Methoden, Karten umdrehen???  FEATURE einfaches überblenden???  INCLUSIVE!
+    2 absolut, 2 relativ
+
+
+[x] Fundorte übersichtskarte einbauen
+[x] cluster testen
+[x] mehrere punkte anzeigen
+[x] wechsel im router
+[x] seite aufbauen
+
+
+[x] Körper Seite bauen DI
+[x] macht es Sinn hier mehrere Seiten zu machen die man über Buttons auswählt ??? 
+
+
+
+[x] Quiz dummy
+    Fragen, 3 Antworten, Auflösung richtig, falsch, Antwort richtig falsch, optional mit Bilder  2,5 tage extra
+
+
+[x] Fensterform FR
+[x] Impressum Icon animieren ...
+
+[x] iconlayer svg begrenzen ???
+[x] background icons wieder einblenden SO 0.5h
+[x] back ground icon positionen fix vergeben und in einer liste verwalten 0.5h
+[x] mainmenu icons einbauen
+[x] content-box
+[x] content-scroller
+[x] scroll problem mit dragger optimieren, wenn content nicht größer als das fenster sollte derr overflow-y = hidden geschaltet werden 1h
+
+
+[x] Poitionierung der Fenster beim öffnen 1h
+[x] drehung der fenster an orientierung der icons ausrichten 1h
+[x] fenster close windowicon springt...
+
+[x] mainmenu immer schliessen wenn das fenster geschlossen wird 0.25h
+
+[x] timeouts für einzelne menüs abspeichern...  
+[ ] Bei Australopithecus bahrelgazali gibt es leider keine Abbildung.
+[ ] Routing durchtesten
+[ ] content preloading in store???
+[ ] mainwindow anderst aufbauen, event vs store, themen wechsel sollte anderst funktionieren
+[?] icons für menü bewegbar, zu sich herholen möglich und timeout für die bewegung definieren???
+[ ] transform wenn history in der window navigation nicht verfügbar
+[x] move einschränken durchtesten
+[!] glossar verlinken
+[!] glossar overlay
+[ ] englische version
+[x] nach oben scrollen auf der Seite
+[ ] expotec 4K
+[!] Hintergrund farben blenden
+[!] idle skelette zuschneiden
+[x] blitzen beim auf der karte auswählen
+[x] Stammbaum des Lebens Icons frei sortieren
+[x] Stammbaum des Lebens link auf Stammbaum Mensch!
+[x] Impressum öffnen, immer ein fenster, wenn einmal geöffnet gehen die icons weg, also die gleiche mechanik wie bei den windows, aber nur 1 FR
+[x] alter menu beta
+[x] scroller bei bestimmten componenten, z.b. quiz ausschalten???
+[?] blob hinter fenster icon
+[x] umbrüche rausparsen. vor json!!!
+[x] forscher verlinken MI
+[x] forscher overlay MI
+[x] icon für stammbaum leben MO
+[x] weiter stammbaum des lebens
+[x] blending multiply funktioniert nicht bei gedrehter composition, vielleicht direkt die comp mit gedrehten bilder bauen
+[x] abnahme app.vue file nur mit einem geöffneten fenster
+[x] router scroll to hash
+[x] Stammbaum des Lebens temporäre Verbreitung layout
+
+
+_3 wie verändert sich der Körper
+    4 halbe Skelette zu zeichnen in dem neuen Stil, Stil Vorlage Illu ???
+    (muss klar sein was klickbar, die anderen Punkte sind nur beschriftet)
+        Schädel 
+            kurzer Text
+            FEATURE MORPHING ???  4 Schädel  Illu ???   1 Tag extra
+            4 Bilder Schädelbasisknickung verschiebt sich, könnte man auch blättern???  Illu ???  einfach SLIDESHOW
+        Becken / Geburtskanal
+            kurzer Text
+            SLIDESHOW ??? Grafik vorhanden, einfache Animation anzulegen, Drehung des Kopfes bei der Geburt  ??? Illu anpassen ???  
+        Hände / Füße
+            kurzer Text
+            GAME Handpuzzle, eigentlich ausgeschnittene Formen wie beim Pferd, nicht einzelne Knochen, ist viel zu schwer !!!  extra??? 1 Tag
+            GAME Zuordnung der Hände zu Tieren / Mensch ??? was kommt als Auflösung ??? kombiniertes Bild ???
+        Wirbelsäule
+            kurzer Text
+            3 mal Grafik aufrechter Gang
+        Veränderung der Beistellung
+            kurzer Text
+            3 x Knie Bein Grafik
+
+        ??? Die Stellung des Menschen in der Tierwelt ??? in welchem Hauptkapitel  DRAG & DROP GAME aufwändig, ca 1,5 Tage extra
+            kurzer Text
+            Drag & Drop Spiel Zurordnung Mensch Gattung ... in Kreise???  SVG  ???
+            irgendwie laberte die dann noch von einer ANimation nachdem man zugeordnet hat...  hmmm ???
+            >> weiter zum Stammbaum
+
+
+_4 Stammbaum
+    gelieferte Grafik Stammbaum, klickbar, SVG???
+        klickbar sind Gattung und die jeweils dazugehörigen Hominidenarten
+        3 Gattungen, ca. 26 Arten, manche außerhalb einer Gattung
+
+    Gattungsseite
+        Texte mit Begriffserklärung und Bilder der Arten, Arten von hier aus aufrufbar
+        Arten sortiert nach Zeitraum
+
+    Artenseite
+        Steckbrief mit Karte und Fotos, Zeitraum auf horizontaler Zeitleiste angezeigt.
+        Zeitleiste unten verfügbar und anklickbar, entweder kommt man darüber zurück auf die Karte
+        oder es wird ein Minimenü Angeboten zur Auswahl der an einer Stelle verfügbaren Art.
+
+
+_5 Fundorte
+    große Karte der Fundort, nicht zoombar, Fundorte daneben in einer Liste SVG???
+        Fundort ca 20 ???
+            mittellanger Text, teilweise Forscher verlinkt im Text.
+            Karte
+            Fundstücke
+            Fotos
+
+        Forscher    
+            Name, Daten, kurzer Text, Foto
+
+
+_7 Glossar
+    Worte Im Text markiert können im Glossar aufgerufen werden   2,5 Tage extra
+    alle hinterlegten Worte könnten in einem Toolhinterlegt sein,
+    ??? Aufruf nur auf einer geöffneten MT Seite ??? 
+
+_8 Impressum     0.5 Tage extra
+    das übliche, die Frage ob das global als Hauptmenüpunkt oder lokal auf eine MT Seite aufrufbar ist
+
