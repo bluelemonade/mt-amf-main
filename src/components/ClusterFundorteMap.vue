@@ -1,0 +1,327 @@
+<template>
+  <div style="height: 712px" :ref="'' + reference">
+    <!-- <h1>{{ msg }}</h1>
+    <div class="info" style="height: 10%">
+      <span>Center: {{ center }}</span>
+      <span>Zoom: {{ zoom }}</span>
+      <span>Bounds: {{ bounds }}</span>
+    </div> -->
+    <!-- <LMap :zoom="zoom" :center="center" :minZoom="minZoom" :maxZoom="maxZoom" :options="mapOptions" :zoomControl="false"   :bounceAtZoomLimits="true" -->
+    <!-- <LMap :ref="'map' + reference"  :zoom="zoom" :center="returnFundortCenter" :minZoom="minZoom" :maxZoom="maxZoom" :options="mapOptions" :maxBounds="maxBounds" zoomControl="false"  -->
+    <LMap :ref="'map' + reference" :tms="false" :zoom="zoom" :center="initialLocation" :minZoom="minZoom" :maxZoom="maxZoom" :options="mapOptions" :maxBounds="maxBounds" zoomControl="false" 
+        @ready="mapReady"
+        @moveend="mapMoveEnd" 
+        @update:zoom="zoomUpdated"
+        @update:center="centerUpdated"
+        @update:bounds="boundsUpdated">
+        <!-- <LIcondefault></LIcondefault> -->
+        <LTileLayer :url="url" :tms="false" :option="tileOptions" ></LTileLayer>
+        <!-- <LMarker :lat-lng="returnFundortPos" :icon="defaultIcon" @click="clickMarker()" ></LMarker> -->
+        <!-- Create image icon (icon) from l-icon tag -->
+        
+         <!-- <template v-if="fundortnr!=0">  
+          <LMarker :lat-lng="returnFundortPos" @click="clickMarker()" >
+            <LIcon
+              :icon-size="dynamicSize"
+              :icon-anchor="dynamicAnchor"
+              icon-url="./static/map-data/marker.svg"
+            />
+            <LTooltip  :content="returnFundortText" :options="tooltipOptions"></LTooltip>
+          </LMarker>
+        </template> -->
+
+
+        <v-marker-cluster :options="clusterOptions" @clusterclick="click" @ready="ready">
+          <!-- <LMarker v-for="l in locations" :key="l.id" :lat-lng="l.latlng" :icon="icon" icon-url="./static/map-data/marker.svg"  @click="clusterMarkerClick"> -->
+          <!-- <LMarker v-for="l in locations" :key="l.id" :lat-lng="l.latlng" @click="clusterMarkerClick"> -->
+          <LMarker v-for="l in fundorte" :key="l.nr" :lat-lng="[ l.lat, l.lon]" @click="clusterMarkerClick(l.nr)">
+            <!-- <LPopup @popclick="popClick" :content="l.text"></LPopup> -->
+            <LIcon
+              :icon-size="dynamicSize"
+              :icon-anchor="dynamicAnchor"
+              :icon-url="dynamicIcon(l.nr)"
+              
+            />
+          <LTooltip  :content="l[getLanguage]" :options="tooltipOptions" @click="clusterMarkerClick"></LTooltip>
+          </LMarker>
+        </v-marker-cluster>
+       
+
+    </LMap>
+  </div>
+</template>
+
+<script>
+import L from 'leaflet';
+import { LMap, LTileLayer, LMarker, LIcon, LTooltip } from "vue2-leaflet";
+import { latLng, Icon, icon } from 'leaflet'
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
+
+import iconUrl from 'leaflet/dist/images/marker-icon.png'
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+
+import storeMixin from "../mixins/storeMixin.js";
+
+
+function rand(n) {
+  let max = n +  8.0
+  let min = n - 8.0
+  return Math.random() * (max - min) + min;
+}
+
+
+export default {
+  name: "Map",
+  mixins: [storeMixin],
+  props: {
+    msg: String,
+    reference: String,
+    fundortnr: String,
+    centernr: String
+  },
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LIcon,
+    LTooltip, // LPopup,
+    'v-marker-cluster': Vue2LeafletMarkerCluster
+  },
+  data() {
+      let locations = []
+      for (let i = 0; i < 10; i++) {
+        locations.push({
+          id: i,
+          latlng: latLng(rand(11.1), rand(40.58333333)),
+          text: 'Punkt ' + i
+        })
+      }
+      let customicon = icon(Object.assign({},
+        Icon.Default.prototype.options,
+        {iconUrl, shadowUrl}
+      ))
+    return {
+      locations,
+        icon: customicon,
+        clusterOptions: {
+          showCoverageOnHover: false,
+          spiderfyDistanceMultiplier: 4,
+          zoomToBoundsOnClick: true,
+          spiderfyOnMaxZoom: true,
+        },
+        tooltipOptions: {
+          permanent: true, 
+          interactive: true,
+          className: 'class-tooltip'
+        },
+        tileOptions: {
+           minZoom: 0,
+           maxZoom: 6,
+           tms: false,
+        },
+        initialLocation: latLng(11.1, 40.58333333),
+        mapOptions: { zoomControl: true, attributionControl: false, zoomSnap: true, dragging: true, doubleClickZoom: false, scrollWheelZoom: true},
+      // url: "http://localhost:8080/static/map-data/NE2_LR_LC_SR_W_DR/{z}/{x}/{y}.png",
+      url: "./static/map-data/NE2_LR_LC_SR_W_DR/{z}/{x}/{y}.png",
+      // url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      zoom: 3,
+      minZoom: 3,
+      maxZoom: 6,
+      center: [11.1, 40.58333333],
+      // center: [13.1367826,77.5711133],
+      tms: false,
+      attribution: 'Background: <a href="http://www.shadedrelief.com/natural2/index.html"/>Natural Earth</a> by <a href="http://shadedrelief.com/"/>Tom Patterson</a>',
+      bounds: null,
+      maxBounds: L.latLngBounds(
+        L.latLng(-50, -120), //southwest
+        L.latLng(80, 250)
+      ),
+      // defaultIcon: L.icon({
+      //   iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+      //   shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      //   iconSize:     [38, 95],
+      //   shadowSize:   [50, 64],
+      //   iconAnchor:   [22, 94],
+      //   shadowAnchor: [4, 62],
+      //   popupAnchor:  [-3, -76]
+      // }),
+      // defaultIcon: L.icon({
+      //   iconUrl: './static/map-data/marker.svg',
+      //   // shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      //   iconSize:     this.dynamicSize(),
+      //   // shadowSize:   [50, 64],
+      //   iconAnchor:   this.dynamicAnchor(),
+      //   // shadowAnchor: [4, 62],
+      //   // popupAnchor:  [-3, -76]
+      // }),
+      defaultIcon: L.icon({
+        iconUrl: './static/map-data/marker.svg',
+        // shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+        iconSize:     [40, 40],
+        // shadowSize:   [50, 64],
+        iconAnchor:   [20, 20],
+        // shadowAnchor: [4, 62],
+        // popupAnchor:  [-3, -76]
+      }),
+      // redSymbol: { radius: 8,
+      //   fillColor: "#b5625c",
+      //   color: "#3d3d38",
+      //   weight: 1.5,
+      //   opacity: 1,
+      //   fillOpacity: 1
+      // },
+      fundorte: [
+                  {
+                      "nr": 1,
+                      "de": "Hadar",
+                      "en": "Hadar",
+                      "lon": 40.58333333,
+                      "lat": 11.1
+                  },
+                  {
+                      "nr": 2,
+                      "de": "xxx",
+                      "en": "xxx",
+                      "lon": 30.58333333,
+                      "lat": 15.1
+                  },
+                  {
+                      "nr": 3,
+                      "de": "xxx",
+                      "en": "xxx",
+                      "lon": 20.58333333,
+                      "lat": 32.1
+                  }
+             ]
+    }
+  },
+  mounted() {
+    // console.log(this.$refs['map' + this.reference]);
+    // this.$refs['map' + this.reference].fitBounds([40.712, -74.227],
+    // [40.774, -74.125]);
+    // console.log(this);
+    setTimeout(function() { window.dispatchEvent(new Event('resize')) }, 1000);
+  },
+  created() {
+      this.$http.get('./static/fundorte-map.json').then(response => {
+      // console.log("!!!!!  fundorte-map wurde geladen! !!!!", this.idNr)
+      this.fundorte = response.body.fundorte;
+      // console.log(this.fundorte);
+    }, response => {
+      console.log(response);
+      console.log("!!!!! fundorte-map wurde nicht geladen! !!!!!")
+      // this.endload = true;
+    });
+  },
+  methods: {
+    // click: (e) => console.log("clusterclick", e),
+    click (e) {
+      // console.log("clusterclick", e)
+    },
+    ready: (e) => console.log('ready', e),
+    // popClick (e){
+    //   console.log("popClick", e);
+    // },
+    // toolClick (e){
+    //   console.log("popClick", e);
+    // },
+    mapReady (e){
+      console.log("mapReady", e)
+    },
+    clickMarker (){
+      console.log("clickMarker", this.fundortnr);
+    },
+    clusterMarkerClick (nr){
+      console.log("clusterMarkerClick", nr);
+      this.$emit('openFundort', nr)
+    },
+    getIcon (){
+
+      // return L.circleMarker([xx, yy], this.redSymbol)
+    },
+    zoomUpdated (zoom) {
+      this.zoom = zoom;
+    },
+    centerUpdated (center) {
+      this.center = center;
+    },
+    boundsUpdated (bounds) {
+      this.bounds = bounds;
+    },
+    mapMoveEnd(){
+      // console.log("mapmoveEnd");
+    },
+    dynamicIcon(nr){
+      if (nr == this.fundortnr){
+        return "./static/map-data/marker.svg";
+      } else {
+        return "./static/map-data/marker-passiv.svg";
+      }
+    },
+    // returnCenterPos(){
+    //   console.log("returnCenterPos");
+    //   // return [11.1,40.58333333]
+    //   //  [' + fundorte[parseInt(fundortnr) -1].long + ',' + fundorte[parseInt(fundortnr)-1].lat + ' ]
+    //   if ( (this.fundortnr < parseInt("1")) ||  (this.fundortnr > parseInt("2") ) ) {
+    //     console.log("returnCenterPos ups");
+    //     return this.center
+    //   }else {
+    //     this.center = [ this.fundorte[parseInt(this.fundortnr) -1].lat, this.fundorte[parseInt(this.fundortnr)-1].long];
+    //     console.log("returnCenterPos OK");
+    //     return this.center;
+    //   }
+    // }
+  },
+  computed: {
+    dynamicSize() {
+      return [this.zoom *8 , this.zoom * 8];
+    },
+    dynamicAnchor() {
+      return [this.zoom *8 / 2, this.zoom *8 / 2];
+    },
+   
+    returnFundortPos(){
+      // console.log("returnFundortPos");
+      // if ( ( parseInt(this.fundortnr) >= 1)  &&  ( parseInt(this.fundortnr) <= 2) )  {
+      //   this.center = [ this.fundorte[parseInt(this.fundortnr) -1].lat, this.fundorte[parseInt(this.fundortnr)-1].lon];
+      // }
+      // return [11.1,40.58333333]
+      //  [' + fundorte[parseInt(fundortnr) -1].lon + ',' + fundorte[parseInt(fundortnr)-1].lat + ' ]
+      return [ this.fundorte[parseInt(this.fundortnr) -1].lat, this.fundorte[parseInt(this.fundortnr)-1].lon]
+    },
+    returnFundortText(){
+      return this.fundorte[parseInt(this.fundortnr) -1][this.getLanguage];
+    },
+     returnFundortCenter(){
+      // console.log("returnFundortPos");
+      // if ( ( parseInt(this.fundortnr) >= 1)  &&  ( parseInt(this.fundortnr) <= 2) )  {
+        // this.center;
+        return [ this.fundorte[parseInt(this.centernr) -1].lat, this.fundorte[parseInt(this.centernr)-1].lon];
+      // } else {
+      //   return [ this.fundorte[0].lat, this.fundorte[0].long];
+      // }
+      // return this.center;
+    },
+    
+  }
+};
+</script>
+
+<style scoped>
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+  
+</style>
+
+<style >
+  .class-tooltip {
+  background: rgb(255, 255, 255);
+  /* border: 2px solid rgb(114, 114, 114); */
+  font-family: FontLight;
+  font-size: 22px;
+  line-height: 26px;
+  margin-top: 10px;
+}
+
+</style>

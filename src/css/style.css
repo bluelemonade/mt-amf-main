@@ -1,0 +1,363 @@
+    
+/* * { outline: 1px solid red; } */
+
+* {scroll-behavior: smooth;}
+
+html {
+  overflow: -moz-scrollbars-vertical !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  /* cursor: none; */
+}
+body {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  margin: 0px;
+}
+
+text {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+/* * {
+   scale: 1.5;
+} */
+
+@font-face {
+  font-family: "FontLight";
+  src: url("../assets/font/TheMixC5-3_Light.otf");
+}
+@font-face {
+  font-family: "FontLightItalic";
+  src: url("../assets/font/TheMixC5-3iLightItalic.otf");
+}
+@font-face {
+  font-family: "FontRegular";
+  src: url("../assets/font/TheMixC5-5_Plain.otf");
+}
+@font-face {
+  font-family: "FontRegularItalic";
+  src: url("../assets/font/TheMixC5-5iPlainItalic.otf");
+}
+@font-face {
+  font-family: "FontBold";
+  src: url("../assets/font/TheMixC5-7_Bold.otf");
+}
+@font-face {
+  font-family: "FontBoldItalic";
+  src: url("../assets/font/TheMixC5-7iBoldItalic.otf");
+}
+/* schriften ///////////////*/
+
+
+/* Anwendungslabel */
+/* .appLanguage {
+  font-family: "fontBold";
+  margin-top: 10px;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  text-align: center;
+} */
+/* .appHeader {
+  font-family: "fontBold";
+  font-size: 60px;
+  line-height: 60px;
+  letter-spacing: 0.075em;
+  margin-left: 60px;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+.appTimeoutLeft {
+  font-family: "fontRegular";
+  font-size: 35px;
+  line-height: 50px;
+  letter-spacing: 0.01em;
+} */
+/* .appTimeoutMenu {
+  font-family: "fontBold";
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: 0.072em;
+  text-transform: uppercase;
+} */
+
+.appMenuIntroHead{
+  font-family: "fontBold";
+  font-size: 62px;
+  line-height: 74px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.appMenuIntroText{
+  font-family: "fontRegular";
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+}
+.appThemaHome{
+  font-family: "fontBold";
+  font-size: 30px;
+  line-height: 32px;
+  margin-left: 34px;
+  /* margin-top:24px; */
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  /* ab hier centered text */
+  position: absolute;  
+  top: 50%;
+  transform: translateY(-50%);
+}
+.appMenuListe {
+  font-family: "fontBook";
+  font-size: 26px;
+  color: white;
+  line-height: 30px;
+  margin-left: 2px;
+  margin-top:28px;
+  /* letter-spacing: 0.11em; */
+  text-transform: uppercase;
+}
+/* .appMenuIntroText{
+  font-family: "fontRegular";
+  font-size: 32px;
+  line-height: 50px;
+  letter-spacing: 0.01em;
+} */
+/* .trennung {
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+ -webkit-hyphenate-limit-chars: auto 3;
+ -webkit-hyphenate-limit-lines: 4;
+ -ms-hyphenate-limit-chars: auto 3;
+ -ms-hyphenate-limit-lines: 4;
+} */
+/* .appContentHeadline {
+  font-family: "fontHeavy";
+  font-size: 60px;
+  line-height: 60px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  min-height: 70px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  vertical-align:bottom;
+  
+}
+.appContentCopy {
+  font-family: "fontRegular";
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+}
+
+.appContentImage {
+  font-family: "fontRegular";
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.01em;
+} */
+
+/* .appContentCopyBold {
+  font-family: "fontBold";
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+}
+
+.appContentCopyItalic {
+  font-family: "fontItalic";
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+}
+
+.appContentCopyLightItalic {
+  font-family: "fontLightItalic";
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.01em;
+}
+
+.appContentSubline {
+  font-family: "fontRegular";
+  font-size: 24px;
+  line-height: 28px;
+}
+.fontHeavyRegularSub {
+  font-family: "fontRegular";
+  font-size: 24px;
+  line-height: 28px;
+}
+.fontInfo {
+  font-family: "fontRegular";
+  font-size: 20px;
+  line-height: 20px;
+  color: rgb(20, 20, 20);
+}
+.fontButton {
+  font-family: "fontBold";
+  color: #000000;
+  font-size: 22px;
+  line-height: 29.6px;
+} */
+
+p {
+  margin: 0px;
+}
+
+#overlay-logo {
+  /* z-index: 51; */
+  pointer-events: none;
+  position: absolute;
+  top: 10px;
+  left: 1490px;
+}
+
+
+
+/* die Kreise mit Animation */
+/* .svghue {
+  animation: pulse 10s infinite;
+  -webkit-animation: pulse 30s infinite;
+} */
+
+/* .svghue:hover {
+    animation: pulse 10s infinite;
+    -webkit-animation: pulse 10s infinite;
+  }
+*/
+
+/* animiert die Küchenkreise ///////////////////*/
+/* @keyframes pulse {
+  0% {
+    fill: #00000088;
+  }
+  17% {
+    fill: #00000066;
+  }
+  33% {
+    fill: #00000044;
+  }
+  50% {
+    fill: #00000022;
+  }
+  67% {
+    fill: #00000044;
+  }
+  83% {
+    fill: #00000066;
+  }
+  100% {
+    fill: #00000088;
+  }
+} */
+
+/* @-webkit-keyframes pulse {
+  0% {
+    fill: #ff0000;
+  }
+  17% {
+    fill: #ffff00;
+  }
+  33% {
+    fill: #00ff00;
+  }
+  50% {
+    fill: #00ffff;
+  }
+  67% {
+    fill: #0000ff;
+  }
+  83% {
+    fill: #ff00ff;
+  }
+  100% {
+    fill: #ff0000;
+  }
+} */
+/* Animiert die Küchenkreise Ende //////////////*/
+
+/* vue transitions  */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+  overflow: hidden;
+  position: absolute;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+.fadedelay-enter-active,
+.fadedelay-leave-active {
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: absolute;
+  transition-delay: 0.2s;
+}
+.fadedelay-enter,
+.fadedelay-leave-to {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0.7s;
+}
+
+
+
+.fadeslow-enter-active,
+.fadeslow-leave-active {
+  transition: all 1s ease;
+  overflow: hidden;
+  position: absolute;
+}
+.fadeslow-enter,
+.fadeslow-leave-to {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* preloading  */
+.loading {
+  z-index: 201;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  text-align: center;
+  font-size: 50px;
+  font-family: "fontBook";
+}
+.progress {
+  margin-top: 500px;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+}
